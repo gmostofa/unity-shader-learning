@@ -4,6 +4,8 @@ Shader "MyShader/BasicColor"
     {
         _Color ("Color", Color) = (1,1,1,1) // Default white color
     }
+	
+	
     SubShader
     {
         Tags { "RenderType"="Opaque" }
