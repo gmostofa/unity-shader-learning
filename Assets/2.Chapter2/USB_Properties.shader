@@ -30,6 +30,8 @@ Shader "Unlit/USB_Properties"
         [IntRange]
         _Samples ("Samples", Range (0, 255)) = 100
     }
+	
+	
     SubShader
     {
         Pass
