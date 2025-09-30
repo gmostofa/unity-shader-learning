@@ -10,7 +10,7 @@ Shader "Unlit/Barebone"
         {
             CGPROGRAM
             #pragma vertex vert
-            #pragma fragment frag
+            //#pragma fragment frag
             
 
             struct vertextInput
@@ -26,9 +26,9 @@ Shader "Unlit/Barebone"
             {
             }
 
-            fixed4 frag (vertextOutput i) 
+            /*fixed4 frag (vertextOutput i) 
             {
-            }
+            }*/
             ENDCG
         }
     }
