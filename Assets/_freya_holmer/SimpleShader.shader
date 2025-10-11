@@ -42,7 +42,8 @@ Shader "Unlit/SimpleShaderFreyaHolmer"
 
             fixed4 frag (vertextOutput i) : SV_Target
             {
-                return float4(i.normal,0);
+                float3 normal = (i.normal * 0.5) + 0.5;
+                return float4(normal,0);
             }
             ENDCG
         }
