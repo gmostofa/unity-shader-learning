@@ -31,6 +31,7 @@ Shader "Unlit/SimpleShaderFreyaHolmer"
                 float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
                 float3 normal : NORMAL;
+                float3 worldPos : TEXCOORD2;
             };
 
             float4 _Color;
@@ -39,16 +40,17 @@ Shader "Unlit/SimpleShaderFreyaHolmer"
             vertextOutput vert (vertextInput v)
             {
                 vertextOutput o;
-                o.vertex = UnityObjectToClipPos(v.vertex);
                 o.uv = v.uv;
                 o.normal = v.normal;
+                o.worldPos = mul( unity_ObjectToWorld,v.vertex );
+                o.vertex = UnityObjectToClipPos( v.vertex );
                 return o;
             }
 
             fixed4 frag (vertextOutput i) : SV_Target
             {
                 //Lighting
-                //direct Light
+                //direct Diffuse Light
                 float3 lightDir = _WorldSpaceLightPos0.xyz; //normalize(float3(1, 1, 1));
                 float3 lightColor = _LightColor0.rgb; // float3(0.9,0.82,0.7);
                 float3 normal = i.normal;
@@ -56,12 +58,24 @@ Shader "Unlit/SimpleShaderFreyaHolmer"
                 float3 directDiffuseLight = lightFalloff * lightColor;
 
                 //Ambient Light
-                float3 ambientLight = float3(0.5,0.3,0.3);
+                float3 ambientLight = float3(0.1,0.1,0.1);
+                
+                //direct specular Light
+                float3 camPos = _WorldSpaceCameraPos;
+                float3 fragToCam = camPos - i.worldPos;
+                float3 viewDir =  normalize(fragToCam);
+
+                float3 viewReflect =  reflect(-viewDir, i.normal);
+                float specularFalloff = max(0, dot( viewReflect, lightDir));
+
+                return float4(specularFalloff.xxx, 0);
+                
+                // phong
+                
 
                 //Composite Light
                 float3 diffuseLight = ambientLight + directDiffuseLight;
                 float3 finalSurfaceColor = diffuseLight * _Color.rgb;
-                
                 
                 return float4( finalSurfaceColor ,0);
             }
