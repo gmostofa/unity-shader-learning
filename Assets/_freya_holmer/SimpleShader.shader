@@ -42,8 +42,14 @@ Shader "Unlit/SimpleShaderFreyaHolmer"
 
             fixed4 frag (vertextOutput i) : SV_Target
             {
-                float3 normal = (i.normal * 0.5) + 0.5;
-                return float4(normal,0);
+                float3 lightDir = normalize(float3(1, 1, 1));
+                float3 lightColor = float3(0.9,0.82,0.7);
+                float3 normal = i.normal;
+                float lightFalloff = dot(lightDir, normal);
+                float3 diffuseLight = lightFalloff * lightColor;
+
+                
+                return float4(diffuseLight,0);
             }
             ENDCG
         }
