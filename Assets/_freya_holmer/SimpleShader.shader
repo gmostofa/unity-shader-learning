@@ -16,6 +16,7 @@ Shader "Unlit/SimpleShaderFreyaHolmer"
             #pragma fragment frag
 
             #include "UnityCG.cginc"
+            #include "Lighting.cginc"
 
             struct vertextInput
             {
@@ -42,14 +43,16 @@ Shader "Unlit/SimpleShaderFreyaHolmer"
 
             fixed4 frag (vertextOutput i) : SV_Target
             {
-                float3 lightDir = normalize(float3(1, 1, 1));
-                float3 lightColor = float3(0.9,0.82,0.7);
+                float3 lightDir = _WorldSpaceLightPos0.xyz; //normalize(float3(1, 1, 1));
+                float3 lightColor = _LightColor0.rgb; // float3(0.9,0.82,0.7);
+                
                 float3 normal = i.normal;
-                float lightFalloff = dot(lightDir, normal);
+                float lightFalloff = saturate(dot(lightDir, normal));
                 float3 diffuseLight = lightFalloff * lightColor;
 
+                float3 ambientLight = float3(0.5,0.3,0.3);
                 
-                return float4(diffuseLight,0);
+                return float4(ambientLight + diffuseLight,0);
             }
             ENDCG
         }
