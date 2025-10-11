@@ -21,27 +21,28 @@ Shader "Unlit/SimpleShaderFreyaHolmer"
             {
                 float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
+                float3 normal : NORMAL;
             };
 
             struct vertextOutput
             {
                 float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
+                float3 normal : NORMAL;
             };
-
-            //sampler2D _MainTex;
-            //float4 _MainTex_ST;
 
             vertextOutput vert (vertextInput v)
             {
                 vertextOutput o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
+                o.uv = v.uv;
+                o.normal = v.normal;
                 return o;
             }
 
             fixed4 frag (vertextOutput i) : SV_Target
             {
-                return float4(1,1,1,0);
+                return float4(i.normal,0);
             }
             ENDCG
         }
