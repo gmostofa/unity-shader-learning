@@ -47,17 +47,23 @@ Shader "Unlit/SimpleShaderFreyaHolmer"
 
             fixed4 frag (vertextOutput i) : SV_Target
             {
-                return _Color;
+                //Lighting
+                //direct Light
                 float3 lightDir = _WorldSpaceLightPos0.xyz; //normalize(float3(1, 1, 1));
                 float3 lightColor = _LightColor0.rgb; // float3(0.9,0.82,0.7);
-                
                 float3 normal = i.normal;
                 float lightFalloff = saturate(dot(lightDir, normal));
-                float3 diffuseLight = lightFalloff * lightColor;
+                float3 directDiffuseLight = lightFalloff * lightColor;
 
+                //Ambient Light
                 float3 ambientLight = float3(0.5,0.3,0.3);
+
+                //Composite Light
+                float3 diffuseLight = ambientLight + directDiffuseLight;
+                float3 finalSurfaceColor = diffuseLight * _Color.rgb;
                 
-                return float4(ambientLight + diffuseLight,0);
+                
+                return float4( finalSurfaceColor ,0);
             }
             ENDCG
         }
