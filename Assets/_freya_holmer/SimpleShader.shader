@@ -2,6 +2,7 @@ Shader "Unlit/SimpleShaderFreyaHolmer"
 {
     Properties
     {
+        _Color( "Color" , Color ) = (1,1,1,1)
         //_MainTex ("Texture", 2D) = "white" {}
     }
     SubShader
@@ -32,6 +33,9 @@ Shader "Unlit/SimpleShaderFreyaHolmer"
                 float3 normal : NORMAL;
             };
 
+            float4 _Color;
+            
+
             vertextOutput vert (vertextInput v)
             {
                 vertextOutput o;
@@ -43,6 +47,7 @@ Shader "Unlit/SimpleShaderFreyaHolmer"
 
             fixed4 frag (vertextOutput i) : SV_Target
             {
+                return _Color;
                 float3 lightDir = _WorldSpaceLightPos0.xyz; //normalize(float3(1, 1, 1));
                 float3 lightColor = _LightColor0.rgb; // float3(0.9,0.82,0.7);
                 
