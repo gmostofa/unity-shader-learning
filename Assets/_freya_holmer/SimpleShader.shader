@@ -17,13 +17,13 @@ Shader "Unlit/SimpleShaderFreyaHolmer"
 
             #include "UnityCG.cginc"
 
-            struct appdata
+            struct vertextInput
             {
                 float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
             };
 
-            struct v2f
+            struct vertextOutput
             {
                 float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
@@ -32,14 +32,14 @@ Shader "Unlit/SimpleShaderFreyaHolmer"
             //sampler2D _MainTex;
             //float4 _MainTex_ST;
 
-            v2f vert (appdata v)
+            vertextOutput vert (vertextInput v)
             {
-                v2f o;
+                vertextOutput o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 return o;
             }
 
-            fixed4 frag (v2f i) : SV_Target
+            fixed4 frag (vertextOutput i) : SV_Target
             {
                 return float4(1,1,1,0);
             }
