@@ -44,7 +44,7 @@ Material:
     m_Floats:
     - _Amplitude: 0
     - _FillAmount: 0
-    - _FoamWidth: 0.04
+    - _FoamWidth: 0.05
     - _Foam_Smoothness: 0
     - _Frequency: 0
     - _QueueControl: 0
@@ -52,6 +52,7 @@ Material:
     - _Rim_Power: 2
     - _WobbleX: 1
     - _WobbleZ: 1
+    - _XRMotionVectorsPass: 1
     m_Colors:
     - _BottomColor: {r: 0, g: 0.8207547, b: 0.2961154, a: 1}
     - _FillAmount: {r: 0, g: 0, b: 0, a: 0}
