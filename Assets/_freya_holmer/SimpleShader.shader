@@ -73,6 +73,8 @@ Shader "Unlit/SimpleShaderFreyaHolmer"
                 specularFalloff = pow(specularFalloff, _Gloss);
                 
                 return float4(specularFalloff.xxx, 0);
+
+
                 
                 // phong
                 
