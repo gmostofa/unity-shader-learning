@@ -55,7 +55,7 @@ Shader "Unlit/SimpleShaderFreyaHolmer"
                 //direct Diffuse Light
                 float3 lightDir = _WorldSpaceLightPos0.xyz; //normalize(float3(1, 1, 1));
                 float3 lightColor = _LightColor0.rgb; // float3(0.9,0.82,0.7);
-                float3 normal = i.normal;
+                float3 normal = normalize(i.normal);
                 float lightFalloff = saturate(dot(lightDir, normal));
                 float3 directDiffuseLight = lightFalloff * lightColor;
 
@@ -67,7 +67,7 @@ Shader "Unlit/SimpleShaderFreyaHolmer"
                 float3 fragToCam = camPos - i.worldPos;
                 float3 viewDir =  normalize(fragToCam);
 
-                float3 viewReflect =  reflect(-viewDir, i.normal);
+                float3 viewReflect =  reflect(-viewDir, normal);
                 float specularFalloff = max(0, dot( viewReflect, lightDir));
 
                 specularFalloff = pow(specularFalloff, _Gloss);
