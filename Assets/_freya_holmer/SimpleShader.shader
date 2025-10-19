@@ -74,14 +74,12 @@ Shader "Unlit/SimpleShaderFreyaHolmer"
                 
                 return float4(specularFalloff.xxx, 0);
 
-
                 
                 // phong
                 
-
                 //Composite Light
                 float3 diffuseLight = ambientLight + directDiffuseLight;
-                float3 finalSurfaceColor = diffuseLight * _Color.rgb;
+                float3 finalSurfaceColor = diffuseLight * _Color.rgb + specularFalloff;
                 
                 return float4( finalSurfaceColor ,0);
             }
