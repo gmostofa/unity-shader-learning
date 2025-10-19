@@ -11,12 +11,12 @@ Shader "Custom/BasicColor"
 
          float4 vert(float4 vertexPos : POSITION) : SV_POSITION 
          {
-            return UnityObjectToClipPos(vertexPos);
+           return UnityObjectToClipPos(float4(1.0, 1, 1.0, 1.0) * vertexPos);
          }
 
          float4 frag(void) : COLOR // fragment shader
          {
-            return float4(1.0, 0.0, 0.0, 1.0); 
+             return float4(0.6, 1.0, 0.0, 1.0); 
          }
 
          ENDCG
