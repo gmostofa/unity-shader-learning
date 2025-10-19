@@ -6,8 +6,7 @@ Shader "Custom/RGBCube"
  
          #pragma vertex vert 
          #pragma fragment frag
- 
-        
+         
          struct vertexOutput
          {
             float4 pos : SV_POSITION;
@@ -26,7 +25,6 @@ Shader "Custom/RGBCube"
          {
             return input.col; 
          }
- 
          ENDCG  
       }
    }
