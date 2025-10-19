@@ -17,13 +17,13 @@ Shader "Custom/RGBCube"
          {
             vertexOutput output;
             output.pos = UnityObjectToClipPos(vertexPos);
-            output.col = vertexPos + float4(0.5, 0.5, 0.5, 0.0);
+            output.col = vertexPos;
             return output;
          }
  
          float4 frag(vertexOutput input) : COLOR // fragment shader
          {
-            return input.col; 
+            return normalize(input.col); 
          }
          ENDCG  
       }
