@@ -40,9 +40,7 @@ Shader "Custom/LearnProcess"
             half4 frag(VertexOutput input) : SV_Target
             {
                 float2 coords = input.uv;
-
                 float time = _Time.y;
-                
                return frac(coords.y + time);
             }
             ENDHLSL
