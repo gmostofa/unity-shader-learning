@@ -130,6 +130,8 @@ Shader "Custom/ToonWaterMobile"
                 return o;
             }
 
+
+            
             // Helper: decode normal map (assumed tangent-space normal map)
             float3 DecodeNormal(sampler2D nm, float2 uv, float3 worldNormal, float4 tangentWS)
             {
